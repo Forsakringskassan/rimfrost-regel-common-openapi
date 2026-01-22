@@ -1,0 +1,56 @@
+openapi: 3.1.0
+info:
+  title: RTF Done API
+  version: 1.0.0
+  description: Gemensamt API för att markera ett kundbehovsflöde som slutfört
+
+paths:
+  /{kundbehovsflodeId}/done:
+    patch:
+      tags: [RtfDoneController]
+      operationId: markDone
+      summary: Slutför manuell kontroll
+      description: Markerar ett kundbehovsflöde som färdigbehandlat
+      parameters:
+        - name: kundbehovsflodeId
+          in: path
+          required: true
+          description: ID för kundbehovsflödet
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DoneRequest"
+      responses:
+        "200":
+          description: Kontroll slutförd OK
+        "404":
+          description: Informationen hittades inte
+
+components:
+  schemas:
+    DoneRequest:
+      type: object
+      required:
+        - signera
+        - beslutsutfall
+      properties:
+        avslagsanledning:
+          type: string
+          nullable: true
+        signera:
+          type: boolean
+          default: false
+        beslutsutfall:
+          $ref: "#/components/schemas/Beslutsutfall"
+    Beslutsutfall:
+      type: string
+      description: Utfall av regel, t.ex. om personen har rätt till försäkring
+      enum:
+        - Ja
+        - Nej
+      example: Ja
