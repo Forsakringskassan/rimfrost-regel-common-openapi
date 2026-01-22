@@ -1,35 +1,25 @@
+
 .idea
-*.ipr
-*.iml
-*.iws
-.gradle
+build.mjs
+dist
+dts-config.js
+node_modules
+openapitools.json
+package-lock.json
+package.json
+src/helpers.ts
+template
+tsconfig.json
+typescript-axios
+typescript-fetch
 
-# NetBeans
-nb-configuration.xml
-
-# Visual Studio Code
-.vscode
-.factorypath
-
-# OSX
-.DS_Store
-
-# Vim
-*.swp
-*.swo
-
-# patch
-*.orig
-*.rej
-
-# Local environment
-.env
-
-/build/
-/target/
 src/generated-source
+src/main/resources/openapi.yaml
+build
+.gradle
+bin
 
-# Plugin directory
-/.quarkus/cli/plugins/
-# TLS Certificates
-.certs/
+*/src/
+!src/mock/
+!src/mock/**
+
