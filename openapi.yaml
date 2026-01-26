@@ -6,7 +6,7 @@ info:
 
 paths:
   /{kundbehovsflodeId}/done:
-    patch:
+    post:
       tags: [RtfDoneController]
       operationId: markDone
       summary: Slutför manuell kontroll
@@ -19,38 +19,8 @@ paths:
           schema:
             type: string
             format: uuid
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/DoneRequest"
       responses:
         "200":
           description: Kontroll slutförd OK
         "404":
           description: Informationen hittades inte
-
-components:
-  schemas:
-    DoneRequest:
-      type: object
-      required:
-        - signera
-        - beslutsutfall
-      properties:
-        avslagsanledning:
-          type: string
-          nullable: true
-        signera:
-          type: boolean
-          default: false
-        beslutsutfall:
-          $ref: "#/components/schemas/Beslutsutfall"
-    Beslutsutfall:
-      type: string
-      description: Utfall av regel, t.ex. om personen har rätt till försäkring
-      enum:
-        - Ja
-        - Nej
-      example: Ja
